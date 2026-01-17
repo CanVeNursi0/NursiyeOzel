@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sana Özel 💖</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Sana Özel ❤️</title>
 <style>
 html, body {
     margin: 0;
@@ -12,146 +11,165 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
+    /* Telefonlarda sayfanın aşağı kaymasını engellemek için */
+    touch-action: none; 
 }
 
 body {
-    background: linear-gradient(135deg, #000000 60%, #4b0000);
+    background: linear-gradient(to bottom, #050508, #1a0008);
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: white;
+    justify-content: center;
 }
 
 #container {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    /* Mobilde içeriğin dikeyde tam ortalanması için */
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-}
-
-#startBtn {
-    padding: 15px 40px;
-    font-size: 20px;
-    border: none;
-    border-radius: 30px;
-    background: linear-gradient(45deg, #ff0033, #ff6699);
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 0 20px rgba(255,0,80,0.6);
-}
-
-#messageBox {
-    display: none;
-    background: rgba(0,0,0,0.65);
-    padding: 20px;
-    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    width: 85%;
-    max-width: 420px;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 0 40px rgba(255,0,80,0.4);
+    color: white;
+    z-index: 10;
+}
+
+h1 {
+    color: #ff4d6d;
+    font-size: 1.5rem; /* Mobilde çok devasa olmasın */
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+#panel {
+    margin: 20px auto;
+    padding: 25px 20px;
+    background: rgba(10, 10, 20, 0.85);
+    border-radius: 25px;
+    min-height: 100px; /* Mobilde biraz daha kompakt */
+    width: 100%;
+    max-width: 400px; /* Telefon enine göre kısıtladık */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 77, 109, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #text {
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 18px; /* Telefon için ideal okuma boyutu */
+    line-height: 1.5;
+    font-weight: 500;
 }
 
-.heart {
-    position: absolute;
-    color: red;
+#startBtn {
+    background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+    color: white;
+    border: none;
+    padding: 15px 35px; /* Mobilde parmakla basmak kolay olsun */
+    border-radius: 50px;
     font-size: 18px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.8;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+    transition: transform 0.2s;
 }
+
+#startBtn:active {
+    transform: scale(0.95); /* Basılınca tepki versin */
+}
+
+/* Kalpler ve Yıldızlar */
+.heart, .star {
+    position: absolute;
+    bottom: -50px;
+    pointer-events: none;
+    z-index: 1;
+    animation: floatUp linear forwards;
+}
+
+.star { color: #ffd6ff; }
+.heart { color: #ff4d6d; }
 
 @keyframes floatUp {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-800px) scale(1.5);
-        opacity: 0;
-    }
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
 }
 </style>
 </head>
-
 <body>
 
-<script>
-alert("Bu site sadece sen açabilesin diye yapıldı 💖");
-</script>
-
 <div id="container">
+    <h1>💌 Sana küçük bir sürprizim var</h1>
 
-<button id="startBtn">Başlat ❤️</button>
+    <div id="panel">
+        <div id="text">Hazırsan başlayalım...</div>
+    </div>
 
-<div id="messageBox">
-    <div id="text"></div>
-</div>
-
+    <button id="startBtn">Başlat ❤️</button>
 </div>
 
 <script>
 const messages = [
-    "Biliyor musun...",
-    "Gülüşün insanın içini ısıtıyor.",
-    "Bazı insanlar güzeldir.",
-    "Bazıları özeldir.",
-    "Ama sen...",
-    "ikisi birden olmuşsun 💖",
-    "",
-    "(Bu kadar güzel olma ya, insan kıskanıyor 😄❤️)"
+    ["❤️ Sana küçük bir şey göstermek istedim...", "#ff4d6d"],
+    ["Seni tanımak başıma gelen en güzel şeylerden biri.", "#ff8fa3"],
+    ["(yan etkileri: sürekli gülümseme)", "#ff6f91"],
+    ["Gülüşün aşırı güzel…", "#ff4d6d"],
+    ["(bu kadar güzel olma, insan kıskanıyor)", "#ff6f91"],
+    ["Cidden çok özelsin.", "#ff8fa3"],
+    ["(bunu CV’ne yazabilirsin)", "#ff6f91"],
+    ["Bazen sadece var olman bile yetiyor.", "#ff4d6d"],
+    ["(fazlası kalp çarpıntısı yapıyor)", "#ff6f91"],
+    ["Seni sevmek baya güzel bir alışkanlık oldu.", "#ff8fa3"],
+    ["(bırakmayı düşünmüyorum)", "#ff6f91"],
+    ["Seni gerçekten çok seviyorum ❤️", "#ff0033"],
+    ["(ciddi ciddi… şaka değil bak 😌)", "#ff6f91"]
 ];
-
-let msgIndex = 0;
-let charIndex = 0;
 
 const textDiv = document.getElementById("text");
 const startBtn = document.getElementById("startBtn");
-const box = document.getElementById("messageBox");
+const container = document.getElementById("container");
 
-startBtn.onclick = () => {
-    startBtn.style.display = "none";
-    box.style.display = "block";
-    typeWriter();
-};
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-function typeWriter() {
-    if (msgIndex >= messages.length) return;
-
-    if (charIndex < messages[msgIndex].length) {
-        textDiv.innerHTML += messages[msgIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeWriter, 80); // mobil uyumlu yavaş hız
-    } else {
-        textDiv.innerHTML += "<br><br>";
-        msgIndex++;
-        charIndex = 0;
-        setTimeout(typeWriter, 800);
+async function typeText(message, color) {
+    textDiv.style.color = color;
+    textDiv.textContent = "";
+    for (let ch of message) {
+        textDiv.textContent += ch;
+        await sleep(50); // Mobilde okuma hızı için ideal
     }
 }
 
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.bottom = "-20px";
-    heart.style.fontSize = (12 + Math.random() * 24) + "px";
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 6000);
+async function startAnimation() {
+    startBtn.style.display = "none"; // Silmek yerine gizle (layout kaymasın)
+    for (let [msg, color] of messages) {
+        await typeText(msg, color);
+        await sleep(1500); // Cümleler arası bekleme
+    }
 }
 
-setInterval(createHeart, 350);
-</script>
+startBtn.addEventListener("click", startAnimation);
 
+function createFloating(symbol, className) {
+    const el = document.createElement("div");
+    el.className = className;
+    el.textContent = symbol;
+    el.style.left = Math.random() * 100 + "%";
+    el.style.fontSize = (15 + Math.random() * 20) + "px";
+    el.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(el); // Container dışına, body'e ekle ki taşma yapmasın
+
+    setTimeout(() => el.remove(), 10000);
+}
+
+// Kalp ve yıldız yağmurunu başlat
+setInterval(() => {
+    createFloating("❤", "heart");
+    if (Math.random() > 0.4) createFloating("✨", "star");
+}, 450);
+</script>
 </body>
 </html>

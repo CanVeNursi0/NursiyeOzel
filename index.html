@@ -11,8 +11,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font-family: "Segoe UI", Arial, sans-serif;
-    /* Telefonlarda sayfanın aşağı kaymasını engellemek için */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     touch-action: none; 
 }
 
@@ -23,10 +22,63 @@ body {
     justify-content: center;
 }
 
+/* --- Bildirim Paneli Tasarımı --- */
+#notification {
+    position: fixed;
+    top: -100px; /* Başlangıçta gizli */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 350px;
+    background: rgba(25, 25, 25, 0.9);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 15px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 9999;
+    transition: top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#notification.show {
+    top: 20px; /* Ekrana giriş yaptığı yer */
+}
+
+.notif-icon {
+    width: 40px;
+    height: 40px;
+    background: #ff4d6d;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.notif-content {
+    flex: 1;
+}
+
+.notif-title {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.notif-text {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* --- Ana Sayfa İçeriği --- */
 #container {
     position: relative;
     width: 90%;
-    /* Mobilde içeriğin dikeyde tam ortalanması için */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,50 +90,42 @@ body {
 
 h1 {
     color: #ff4d6d;
-    font-size: 1.5rem; /* Mobilde çok devasa olmasın */
+    font-size: 1.4rem;
     margin-bottom: 20px;
-    padding: 0 10px;
 }
 
 #panel {
     margin: 20px auto;
     padding: 25px 20px;
-    background: rgba(10, 10, 20, 0.85);
+    background: rgba(15, 15, 25, 0.8);
     border-radius: 25px;
-    min-height: 100px; /* Mobilde biraz daha kompakt */
+    min-height: 100px;
     width: 100%;
-    max-width: 400px; /* Telefon enine göre kısıtladık */
+    max-width: 400px;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 77, 109, 0.3);
+    border: 1px solid rgba(255, 77, 109, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #text {
-    font-size: 18px; /* Telefon için ideal okuma boyutu */
+    font-size: 18px;
     line-height: 1.5;
-    font-weight: 500;
 }
 
 #startBtn {
     background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
     color: white;
     border: none;
-    padding: 15px 35px; /* Mobilde parmakla basmak kolay olsun */
+    padding: 15px 40px;
     border-radius: 50px;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-    transition: transform 0.2s;
+    margin-top: 20px;
 }
 
-#startBtn:active {
-    transform: scale(0.95); /* Basılınca tepki versin */
-}
-
-/* Kalpler ve Yıldızlar */
 .heart, .star {
     position: absolute;
     bottom: -50px;
@@ -101,17 +145,37 @@ h1 {
 </head>
 <body>
 
+<div id="notification">
+    <div class="notif-icon">🔒</div>
+    <div class="notif-content">
+        <span class="notif-title">Sistem Mesajı</span>
+        <span class="notif-text">Bu site sadece sen açabilesin diye yapıldı 💖</span>
+    </div>
+</div>
+
 <div id="container">
-    <h1>💌 Sana küçük bir sürprizim var</h1>
+    <h1>💌 Küçük bir notun var</h1>
 
     <div id="panel">
-        <div id="text">Hazırsan başlayalım...</div>
+        <div id="text">Ekrana bir bildirim geldi, gördün mü? ✨</div>
     </div>
 
-    <button id="startBtn">Başlat ❤️</button>
+    <button id="startBtn">Okumaya Başla ❤️</button>
 </div>
 
 <script>
+// Sayfa açıldıktan 1 saniye sonra bildirim düşsün
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById('notification').classList.add('show');
+        
+        // 5 saniye sonra bildirim kendiliğinden yukarı gitsin
+        setTimeout(() => {
+            document.getElementById('notification').classList.remove('show');
+        }, 5000);
+    }, 1000);
+};
+
 const messages = [
     ["❤️ Sana küçük bir şey göstermek istedim...", "#ff4d6d"],
     ["Seni tanımak başıma gelen en güzel şeylerden biri.", "#ff8fa3"],
@@ -119,18 +183,14 @@ const messages = [
     ["Gülüşün aşırı güzel…", "#ff4d6d"],
     ["(bu kadar güzel olma, insan kıskanıyor)", "#ff6f91"],
     ["Cidden çok özelsin.", "#ff8fa3"],
-    ["(bunu CV’ne yazabilirsin)", "#ff6f91"],
     ["Bazen sadece var olman bile yetiyor.", "#ff4d6d"],
     ["(fazlası kalp çarpıntısı yapıyor)", "#ff6f91"],
-    ["Seni sevmek baya güzel bir alışkanlık oldu.", "#ff8fa3"],
-    ["(bırakmayı düşünmüyorum)", "#ff6f91"],
     ["Seni gerçekten çok seviyorum ❤️", "#ff0033"],
     ["(ciddi ciddi… şaka değil bak 😌)", "#ff6f91"]
 ];
 
 const textDiv = document.getElementById("text");
 const startBtn = document.getElementById("startBtn");
-const container = document.getElementById("container");
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
@@ -139,15 +199,18 @@ async function typeText(message, color) {
     textDiv.textContent = "";
     for (let ch of message) {
         textDiv.textContent += ch;
-        await sleep(50); // Mobilde okuma hızı için ideal
+        await sleep(50);
     }
 }
 
 async function startAnimation() {
-    startBtn.style.display = "none"; // Silmek yerine gizle (layout kaymasın)
+    startBtn.style.display = "none";
+    // Eğer bildirim hala ekrandaysa başlatınca gitsin
+    document.getElementById('notification').classList.remove('show');
+    
     for (let [msg, color] of messages) {
         await typeText(msg, color);
-        await sleep(1500); // Cümleler arası bekleme
+        await sleep(1500);
     }
 }
 
@@ -160,12 +223,10 @@ function createFloating(symbol, className) {
     el.style.left = Math.random() * 100 + "%";
     el.style.fontSize = (15 + Math.random() * 20) + "px";
     el.style.animationDuration = (5 + Math.random() * 5) + "s";
-    document.body.appendChild(el); // Container dışına, body'e ekle ki taşma yapmasın
-
-    setTimeout(() => el.remove(), 10000);
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 8000);
 }
 
-// Kalp ve yıldız yağmurunu başlat
 setInterval(() => {
     createFloating("❤", "heart");
     if (Math.random() > 0.4) createFloating("✨", "star");

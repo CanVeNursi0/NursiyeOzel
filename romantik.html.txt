@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Birine Özel ❤️</title>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #050508, #1a0008);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    height: 90%;
+    max-height: 600px;
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    color: #ff4d6d;
+}
+
+#panel {
+    margin: 40px auto;
+    padding: 30px 25px;
+    background: rgba(10, 10, 20, 0.85);
+    border-radius: 35px;
+    min-height: 120px;
+    max-width: 650px;
+}
+
+#text {
+    font-size: 20px;
+    min-height: 60px;
+}
+
+#startBtn {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.heart, .star {
+    position: absolute;
+    bottom: -20px;
+    font-size: 18px;
+    animation: floatUp linear forwards;
+}
+
+.star { color: #ffd6ff; }
+.heart { color: #ff4d6d; }
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-700px); opacity: 0; }
+}
+</style>
+</head>
+<body>
+<div id="container">
+    <h1>💌 Sana küçük bir sürprizim var</h1>
+
+    <div id="panel">
+        <div id="text"></div>
+    </div>
+
+    <button id="startBtn">Başlat ❤️</button>
+</div>
+
+<script>
+const messages = [
+    ["❤️ Sana küçük bir şey göstermek istedim...", "#ff4d6d"],
+    ["Seni tanımak başıma gelen en güzel şeylerden biri.", "#ff8fa3"],
+    ["(yan etkileri: sürekli gülümseme)", "#ff6f91"],
+    ["Gülüşün aşırı güzel…", "#ff4d6d"],
+    ["(bu kadar güzel olma, insan kıskanıyor)", "#ff6f91"],
+    ["Cidden çok özelsin.", "#ff8fa3"],
+    ["(bunu CV’ne yazabilirsin)", "#ff6f91"],
+    ["Bazen sadece var olman bile yetiyor.", "#ff4d6d"],
+    ["(fazlası kalp çarpıntısı yapıyor)", "#ff6f91"],
+    ["Seni sevmek baya güzel bir alışkanlık oldu.", "#ff8fa3"],
+    ["(bırakmayı düşünmüyorum)", "#ff6f91"],
+    ["Seni gerçekten çok seviyorum ❤️", "#ff0033"],
+    ["(ciddi ciddi… şaka değil bak 😌)", "#ff6f91"]
+];
+
+const textDiv = document.getElementById("text");
+const startBtn = document.getElementById("startBtn");
+const container = document.getElementById("container");
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function typeText(message, color) {
+    textDiv.style.color = color;
+    textDiv.textContent = "";
+    for (let ch of message) {
+        textDiv.textContent += ch;
+        await sleep(40);
+    }
+}
+
+async function startAnimation() {
+    startBtn.remove();
+    for (let [msg, color] of messages) {
+        await typeText(msg, color);
+        await sleep(1200);
+    }
+}
+
+startBtn.addEventListener("click", startAnimation);
+
+function createFloating(symbol, className) {
+    const el = document.createElement("div");
+    el.className = className;
+    el.textContent = symbol;
+    el.style.left = Math.random() * 100 + "%";
+    el.style.fontSize = (12 + Math.random() * 16) + "px";
+    el.style.animationDuration = (4 + Math.random() * 4) + "s";
+    container.appendChild(el);
+
+    setTimeout(() => el.remove(), 8000);
+}
+
+setInterval(() => {
+    createFloating("❤", "heart");
+    if (Math.random() > 0.5) createFloating("✨", "star");
+}, 400);
+</script>
+</body>
+</html>

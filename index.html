@@ -151,22 +151,11 @@ h1 {
 </head>
 <body>
 
-<div id="notification" id="notif-box">
-    <div class="notif-app-icon">💖</div>
-    <div class="notif-info">
-        <div class="notif-header">
-            <span class="notif-app-name">Sistem Erişimi</span>
-            <span class="notif-time">şimdi</span>
-        </div>
-        <div class="notif-msg">Bu site sadece sen açabilesin diye yapıldı 💖</div>
-    </div>
-</div>
-
+<script>
+alert("Bu site sadece sen açabilesin diye yapıldı 💖");
+</script> 
 <div id="container">
-    <h1>Sana bir mesaj var...</h1>
-    <div id="panel">
-        <div id="text">Yukarıdaki bildirimi gördün mü? ✨</div>
-    </div>
+   
     <button id="startBtn">Gördüm, Başlat ❤️</button>
 </div>
 
@@ -204,3 +193,4 @@ startBtn.onclick = async () => {
     startBtn.style.display = "none";
     
     for (let [msg, color] of messages
+

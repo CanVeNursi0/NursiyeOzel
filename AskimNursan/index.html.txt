@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Birine Özel ❤️</title>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(to bottom, #050508, #1a0008);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Bildirim kutusu */
+#notification {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: white;
+    padding: 20px;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    animation: slideDown 1s ease;
+    z-index: 1000;
+}
+@keyframes slideDown {
+    from { top: -100px; opacity: 0; }
+    to { top: 0; opacity: 1; }
+}
+#notification button {
+    margin-top: 10px;
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Ana kutu */
+#panel {
+    margin-top: 80px;
+    padding: 30px 25px;
+    background: linear-gradient(to bottom right, #990000, #000000);
+    border-radius: 25px;
+    min-height: 120px;
+    max-width: 650px;
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    display: none; /* Başta gizli */
+}
+
+/* Yazı animasyonu */
+.fadeInOut {
+    animation: fadeInOut 3s forwards;
+}
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(20px); }
+    20% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+</style>
+</head>
+<body>
+
+<div id="notification">
+    <div>🌹 Bu site dünyanın en güzel en iyi sevgilisine hazırlanmıştır 🌹</div>
+    <button id="startBtn">❤️ Başlat</button>
+</div>
+
+<div id="panel">
+    <div id="text"></div>
+</div>
+
+<script>
+const messages = [
+    "Sen benim en güzel tesadüfümsün.",
+    "Hayatımda senin gibi birini bulmak mucize.",
+    "Gözlerin huzurun en saf hali.",
+    "Gülüşün dünyamı aydınlatıyor.",
+    "Yanında olduğumda her şey daha güzel.",
+    "Sen benim en değerli hayalim.",
+    "Kalbim seninle ritmini buldu.",
+    "Sana bakınca geleceği görmek umut dolu.",
+    "Seni sevmek hayatımın en tatlı duası.",
+    "Sen benim en büyük şansım.",
+    "Her anım seninle anlamlı.",
+    "Seninle dünya daha renkli.",
+    "Sen benim en güzel hikayemsin.",
+    "Kalbim seninle tamamlandı.",
+    "Seninle her şey daha kolay.",
+    "Sen benim en özel sırlarımsın.",
+    "Seninle hayat daha tatlı.",
+    "Sen benim en güzel melodimsin.",
+    "Seninle zaman duruyor.",
+    "Sen benim en parlak yıldızımsın.",
+    "Seninle her gün bayram.",
+    "Sen benim en güzel düşümsün.",
+    "Seninle her şey anlamlı.",
+    "Sen benim en değerli armağanımsın.",
+    "Seninle hayatım tamamlandı.",
+    "Sen benim en güzel şiirimsin.",
+    "Seninle kalbim huzur buluyor.",
+    "Sen benim en büyük mutluluğumsun.",
+    "Seninle her şey daha özel.",
+    "Sonsuza kadar seni seveceğim ❤️"
+];
+
+const textDiv = document.getElementById("text");
+const startBtn = document.getElementById("startBtn");
+const panel = document.getElementById("panel");
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function startAnimation() {
+    document.getElementById("notification").style.display = "none"; // Bildirimi kaldır
+    panel.style.display = "block"; // Kutuyu göster
+    for (let msg of messages) {
+        textDiv.textContent = msg;
+        textDiv.className = "fadeInOut";
+        await sleep(3000); // Her mesaj 3 saniye ekranda
+    }
+    // Finalde büyük kalp
+    textDiv.textContent = "❤️";
+    textDiv.style.fontSize = "80px";
+}
+
+startBtn.addEventListener("click", startAnimation);
+</script>
+</body>
+</html>
